@@ -1,5 +1,6 @@
 package queryexpansionn
 
+import grails.converters.JSON
 import org.json.JSONObject
 import utils.SpellCheck
 
@@ -11,17 +12,13 @@ class SearchController {
 
     def search(){
         JSONObject result = SpellCheck.checkWord(params.squery);
-        println result.get("suggestion");
-        println result.getJSONObject()
+        println result.toString();
+        String suggestion =  result.get("suggestion");
 
-        Iterator<String> keys = result.keys();
-        while(keys.hasNext()){
-            String key = keys.next();
-            println(key)
-            println result.get(key);
-        }
+        println suggestion;
+        println result.get("corrections") == null
+        boolean hasErrors = result.get("corrections").length()==0 ? false : true
 
-
-
+        render(view:'list' ,model:[suggestion: suggestion ,original: params.squery , hasError:hasErrors]);
     }
 }
