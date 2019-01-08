@@ -24,18 +24,33 @@
     }
     </style>
 
-
 </head>
 
 <body class="text-center">
-<g:form  action="logUser">
+<g:form controller="userLogin" action="registerUser">
+
+<div class="form-group">
+    <label for="firstName">First Name</label>
+    <g:field class="form-control" type="text" name="firstName" placeholder="Enter First Name"></g:field>
+</div>
+
     <div class="form-group">
-        <label for="squery">What are you searching for?</label>
-        <g:field class="form-control" type="text" name="squery"></g:field>
-        <g:field class="form-control" type="text" name="squery"></g:field>
+        <label for="lastName">Last Name</label>
+        <g:field class="form-control" type="text" name="lastName" placeholder="Enter Last Name"></g:field>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email address</label>
+        %{--<g:field class="form-control" type="email" name="email"></g:field>--}%
+        <g:field type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email"/>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <g:field class="form-control" type="password" name="password" placeholder="Enter Password"></g:field>
     </div>
     <div>
-        <g:submitButton name="searchButton" value="Search" class="btn btn-lg btn-primary btn-block"></g:submitButton>
+        <g:submitButton name="searchButton" value="Register" class="btn btn-lg btn-primary btn-block"></g:submitButton>
     </div>
 </g:form>
 </body>
