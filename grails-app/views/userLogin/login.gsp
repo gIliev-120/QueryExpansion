@@ -30,12 +30,18 @@
 <body class="text-center">
 <g:form  action="logUser">
     <div class="form-group">
-        <label for="squery">What are you searching for?</label>
-        <g:field class="form-control" type="text" name="squery"></g:field>
-        <g:field class="form-control" type="text" name="squery"></g:field>
+        <label for="email">Email</label>
+        <g:field class="form-control" type="text" name="email" placeholder="Enter Email"></g:field>
     </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <g:field class="form-control" type="password" name="password" placeholder="Enter Password"></g:field>
+    </div>
+
+
     <div>
-        <g:submitButton name="searchButton" value="Search" class="btn btn-lg btn-primary btn-block"></g:submitButton>
+        <g:submitButton name="loginButton" value="Login" class="btn btn-lg btn-primary btn-block"></g:submitButton>
     </div>
 </g:form>
 </body>

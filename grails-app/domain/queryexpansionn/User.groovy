@@ -1,11 +1,14 @@
 package queryexpansionn
 
+import enums.UserRoles
+
 class User {
     String firstName;
     String lastName;
     String email;
     String password;
-    Role role;
+    UserRoles role;
+
 
     static constraints = {
         firstName blank: false
@@ -16,5 +19,6 @@ class User {
 
     static mapping = {
         version false
+        role enumType: "identity"
     }
 }

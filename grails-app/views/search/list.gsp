@@ -27,6 +27,14 @@
         padding: 15px;
         margin: auto;
     }
+
+    .list-group{
+        max-height: 500px;
+        margin-bottom: 10px;
+        overflow:scroll;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
     </style>
     <script>
         function fixSuggestion(link){
@@ -50,8 +58,16 @@
         <g:field class="form-control" type="text" name="squery" value="${original}"></g:field>
         <g:submitButton name="searchButton" value="Search" class="btn btn-lg btn-primary btn-block"></g:submitButton>
     </div>
-    <div>
-
+    <br/>
+    <br/>
+    <br/>
+    <div class="form-group">
+        <ul class="list-group">
+            <li class="list-group-item active" style="position:fixed;width: 952px;">Are you lookin for:</li>
+            <g:each in="${relatedWords}" var="relWord">
+                <li class="list-group-item"> ${relWord.word} </li>
+            </g:each>
+        </ul>
     </div>
 </g:form>
 </body>

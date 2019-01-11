@@ -29,10 +29,10 @@
 <body class="text-center">
 <g:form controller="userLogin" action="registerUser">
 
-<div class="form-group">
-    <label for="firstName">First Name</label>
-    <g:field class="form-control" type="text" name="firstName" placeholder="Enter First Name"></g:field>
-</div>
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <g:field class="form-control" type="text" name="firstName" placeholder="Enter First Name"></g:field>
+    </div>
 
     <div class="form-group">
         <label for="lastName">Last Name</label>

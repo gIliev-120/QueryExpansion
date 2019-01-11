@@ -1,5 +1,6 @@
 package queryexpansionn
 
+import enums.UserRoles
 import org.jasypt.util.password.BasicPasswordEncryptor
 
 class UserLoginController {
@@ -19,7 +20,14 @@ class UserLoginController {
     def registerUser(){
         println params;
         User user = new User();
+        user.firstName=params.firstName;
+        user.lastName=params.lastName;
+        user.email=params.email;
+        user.password= new BasicPasswordEncryptor().encryptPassword(params.password);
+        user.role = UserRoles.USER;
+        user.save();
 
+        session["user"]=user;
 
         redirect(controller: "Search", action: "index");
     }
@@ -30,6 +38,25 @@ class UserLoginController {
     }
 
     def logUser(){
+
+        println params;
+        User currentUser = User.findByEmail(params.email)
+        if(currentUser==null){
+            render "NO USER FOUND";
+        }else{
+            if(new BasicPasswordEncryptor().checkPassword(params.password,currentUser.password)){
+                if(UserRoles.ADMINISTRATOR.equals(currentUser.role)){
+                    render "ADMIN AUTHENTICATED";
+                }else if(UserRoles.USER.equals(currentUser.role)){
+                    session["user"]=currentUser;
+                    redirect(controller: "search",action:"index")
+                }
+
+
+            }else{
+                render "USER NOT AUTHENTICATED";
+            }
+        }
 
     }
 }
