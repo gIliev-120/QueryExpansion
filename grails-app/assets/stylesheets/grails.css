@@ -44,7 +44,7 @@ pre {
 
 }
 .navbar-dark, .navbar-static-top {
-    background-color: #424649;
+    background-color: rgba(209, 81, 105, 0.63);
     border: 0px;
 }
 a.navbar-brand {

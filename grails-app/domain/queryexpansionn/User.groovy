@@ -21,4 +21,9 @@ class User {
         version false
         role enumType: "identity"
     }
+
+
+    String toString(){
+        "$firstName $lastName"
+    }
 }

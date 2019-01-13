@@ -29,7 +29,7 @@ class SearchController {
         ArrayList<DatamuseWord> words = mapper.readValue(relatedWordsResult.toString(),new TypeReference<List<DatamuseWord>>(){});
 
         new History(user:session.user,searchedSentence:params.squery).save();
-        render(view:'list' ,model:[suggestion: suggestion ,original: params.squery , hasError:hasErrors,relatedWords:words]);
+        render(view:'list' ,model:[suggestion: suggestion ,original: params.squery , hasError:hasErrors,relatedWords:words.subList(0,20)]);
     }
 
 }

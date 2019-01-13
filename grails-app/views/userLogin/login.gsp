@@ -28,6 +28,11 @@
 </head>
 
 <body class="text-center">
+<g:if test="${flash.error}">
+    <div class="alert alert-danger" role="alert">
+        <strong>${flash.error}</strong>
+    </div>
+</g:if>
 <g:form  action="logUser">
     <div class="form-group">
         <label for="email">Email</label>

@@ -5,16 +5,9 @@ import org.jasypt.util.password.BasicPasswordEncryptor
 
 class UserLoginController {
 
+
     def register() {
         render(view:'regisger')
-        /*BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
-        String encPassword = passwordEncryptor.encryptPassword("1996iliev");
-        println encPassword;
-
-        if(passwordEncryptor.checkPassword("1996iliev",encPassword)){
-            println("yayaaay");
-        }*/
-
     }
 
     def registerUser(){
@@ -28,13 +21,22 @@ class UserLoginController {
         user.save();
 
         session["user"]=user;
+        //TODO FIX MAIL ENCODING
+        sendMail {
+            to user.email
+            subject g.message(code :'mail.subject')
+            text g.message(code:'mail.body',args:[user.firstName,user.email,params.password]);
+        }
 
         redirect(controller: "Search", action: "index");
     }
 
     def login(){
         render(view:'login')
-
+    }
+    def logOut(){
+        session.invalidate();
+        redirect(controller: "home",action: "index")
     }
 
     def logUser(){
@@ -42,19 +44,22 @@ class UserLoginController {
         println params;
         User currentUser = User.findByEmail(params.email)
         if(currentUser==null){
-            render "NO USER FOUND";
+                flash.error = "USER NOT FOUND!"
+                redirect(action: 'login');
         }else{
             if(new BasicPasswordEncryptor().checkPassword(params.password,currentUser.password)){
+                session["user"]=currentUser;
                 if(UserRoles.ADMINISTRATOR.equals(currentUser.role)){
-                    render "ADMIN AUTHENTICATED";
+                    redirect(controller: 'admin',action: 'index');
                 }else if(UserRoles.USER.equals(currentUser.role)){
-                    session["user"]=currentUser;
+
                     redirect(controller: "search",action:"index")
                 }
 
 
             }else{
-                render "USER NOT AUTHENTICATED";
+                flash.error = "Wrong Email/Password!"
+                redirect(action: 'login');
             }
         }
 

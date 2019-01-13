@@ -13,13 +13,17 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
+    <meta name="layout" content="layout"/>
     <style>
+
     body{
+        background-color: #f5f5f5;
+    }
+
+    #content{
         align-items: center;
         padding-top: 40px;
         padding-bottom: 40px;
-        background-color: #f5f5f5;
         height: 100%
     }
     body form{
@@ -35,6 +39,15 @@
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
     }
+
+    #navMenu{
+        float:right;
+        padding-top:20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+
+
+    }
     </style>
     <script>
         function fixSuggestion(link){
@@ -47,7 +60,7 @@
 
 <body class="text-center">
 <g:form  action="search">
-    <div class="form-group">
+    <div id="content" class="form-group">
         <g:if test="${hasError}">
             <label for="squery">
                 Did you mean:
@@ -63,9 +76,9 @@
     <br/>
     <div class="form-group">
         <ul class="list-group">
-            <li class="list-group-item active" style="position:fixed;width: 952px;">Are you lookin for:</li>
+            <li class="list-group-item active">Are you lookin for:</li>
             <g:each in="${relatedWords}" var="relWord">
-                <li class="list-group-item"> ${relWord.word} </li>
+                <li class="list-group-item"> <a href="#" onclick="fixSuggestion(this)">${relWord.word}</a> </li>
             </g:each>
         </ul>
     </div>
